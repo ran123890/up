@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f2ea">
+    <meta name="description" content="用 21 道轻松小题，看看最近一个月的你更像哪一种人间小毛病。仅供娱乐，不是心理诊断。">
+    <title>七宗罪趣味自测</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #24231f;
+        background: #f5f2ea;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        --ink: #24231f;
+        --muted: #77746d;
+        --paper: #fffefa;
+        --line: #e6e1d7;
+        --accent: #bd5839;
+        --accent-dark: #9c4128;
+        --sage: #62735d;
+        --serif: "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+      }
+
+      * { box-sizing: border-box; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; }
+      button { font: inherit; }
+      button:focus-visible { outline: 3px solid #bd5839; outline-offset: 3px; }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+      .app-shell { width: min(100% - 32px, 560px); margin: 0 auto; padding: 26px 0 34px; }
+      .topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 11px; letter-spacing: .12em; }
+      .brand { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .06em; }
+      .brand-mark { display: grid; width: 25px; aspect-ratio: 1; place-items: center; border: 1px solid #d5c9b9; border-radius: 50%; color: var(--accent); font-family: var(--serif); font-size: 14px; }
+      .topline a { color: inherit; text-decoration: none; }
+      .topline a:hover { color: var(--accent-dark); }
+      .view { animation: rise-in .35s ease both; }
+      @keyframes rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      .welcome { display: grid; min-height: min(750px, calc(100svh - 92px)); align-content: center; padding: 42px 2px 32px; }
+      .eyebrow { margin: 0 0 16px; color: var(--accent-dark); font-size: 11px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+      h1, h2, p { margin-top: 0; }
+      .welcome h1 { max-width: 12em; margin-bottom: 18px; font-family: var(--serif); font-size: clamp(36px, 10vw, 56px); font-weight: 600; letter-spacing: -.055em; line-height: 1.18; }
+      .welcome h1 em { color: var(--accent); font-style: normal; }
+      .intro { max-width: 34em; margin-bottom: 22px; color: #5f5c55; font-size: 15px; line-height: 1.9; }
+      .dimension-orbit { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 28px; padding: 0; list-style: none; }
+      .dimension-orbit li { padding: 6px 10px; border: 1px solid #e1dbd0; border-radius: 999px; background: rgba(255, 254, 250, .55); color: #605d56; font-size: 12px; }
+      .note { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 26px; padding: 12px 14px; border-left: 2px solid #b89a6a; background: rgba(255, 254, 250, .62); color: #6b675e; font-size: 12px; line-height: 1.7; }
+      .note-mark { flex: 0 0 auto; color: #a0814f; font-family: var(--serif); font-size: 16px; }
+      .primary-button, .secondary-button, .text-button { min-height: 48px; border-radius: 5px; cursor: pointer; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
+      .primary-button { display: inline-flex; min-width: 176px; align-items: center; justify-content: center; gap: 16px; padding: 0 20px; border: 1px solid var(--accent); background: var(--accent); color: white; font-size: 14px; font-weight: 700; }
+      .primary-button:hover { border-color: var(--accent-dark); background: var(--accent-dark); transform: translateY(-1px); }
+      .primary-button:disabled { border-color: #c9c4ba; background: #c9c4ba; cursor: not-allowed; transform: none; }
+      .arrow { font-size: 18px; font-weight: 400; line-height: 1; }
+      .quiz { padding-top: 50px; }
+      .progress-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; color: var(--muted); font-size: 12px; }
+      .progress-heading strong { color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; }
+      .progress-track { height: 3px; margin-bottom: 42px; overflow: hidden; background: #e4dfd5; }
+      .progress-value { height: 100%; background: var(--accent); transition: width .25s ease; }
+      .question-count { margin-bottom: 15px; color: var(--sage); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+      .quiz h1 { max-width: 18em; min-height: 3.1em; margin-bottom: 29px; font-family: var(--serif); font-size: clamp(24px, 6.4vw, 32px); font-weight: 500; letter-spacing: -.025em; line-height: 1.6; }
+      .answer-list { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; }
+      .answer { display: grid; min-height: 56px; grid-template-columns: 35px 1fr auto; align-items: center; gap: 11px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); color: var(--ink); text-align: left; cursor: pointer; transition: border-color .16s ease, background .16s ease, transform .16s ease; }
+      .answer:hover { border-color: #c8a78d; transform: translateX(2px); }
+      .answer[aria-pressed="true"] { border-color: var(--accent); background: #fbf0e9; box-shadow: inset 0 0 0 1px var(--accent); }
+      .answer-number { display: grid; width: 30px; aspect-ratio: 1; place-items: center; border: 1px solid #e5dfd4; border-radius: 50%; color: #726d64; font-size: 12px; font-variant-numeric: tabular-nums; }
+      .answer[aria-pressed="true"] .answer-number { border-color: var(--accent); background: var(--accent); color: white; }
+      .answer-label { font-size: 14px; }
+      .answer-check { color: var(--accent); font-size: 15px; opacity: 0; }
+      .answer[aria-pressed="true"] .answer-check { opacity: 1; }
+      .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+      .secondary-button, .text-button { padding: 0 14px; border: 1px solid transparent; background: transparent; color: #6f6b63; font-size: 13px; }
+      .secondary-button:hover, .text-button:hover { border-color: var(--line); background: rgba(255, 254, 250, .75); color: var(--ink); }
+      .secondary-button:disabled { color: #b4b0a7; cursor: default; }
+      .hint { min-height: 20px; margin: 0; color: var(--muted); font-size: 12px; text-align: right; }
+      .results { padding-top: 25px; }
+      .result-card { overflow: hidden; border: 1px solid #ded7ca; border-radius: 9px; background: var(--paper); box-shadow: 0 15px 40px rgba(48, 41, 31, .06); }
+      .card-top { display: flex; align-items: center; justify-content: space-between; padding: 17px 19px 13px; border-bottom: 1px solid #eee9df; color: var(--muted); font-size: 10px; letter-spacing: .1em; }
+      .card-brand { display: inline-flex; align-items: center; gap: 7px; color: #5f5b52; font-weight: 700; }
+      .card-brand-mark { display: grid; width: 20px; aspect-ratio: 1; place-items: center; border-radius: 50%; background: #f2e8da; color: var(--accent); font-family: var(--serif); font-size: 12px; }
+      .card-content { padding: 18px 19px 15px; }
+      .result-kicker { margin: 0 0 7px; color: var(--accent-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+      .result-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .result-title { margin: 0; font-family: var(--serif); font-size: clamp(25px, 7vw, 33px); font-weight: 600; letter-spacing: -.045em; line-height: 1.25; }
+      .result-score { flex: 0 0 auto; padding-top: 2px; color: var(--accent); font-family: var(--serif); font-size: 22px; line-height: 1.1; text-align: right; }
+      .result-score small { display: block; margin-top: 4px; color: var(--muted); font-family: inherit; font-size: 10px; }
+      .result-copy { margin: 11px 0 15px; color: #5d5a53; font-size: 12px; line-height: 1.75; }
+      .result-nudge { margin: 0 0 16px; padding: 10px 12px; border-left: 2px solid #b89a6a; background: #f8f5ee; color: #625e54; font-size: 11px; line-height: 1.7; }
+      .distribution-heading { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 9px; color: #504d46; font-size: 11px; font-weight: 700; }
+      .distribution-heading span { color: #908b81; font-size: 10px; font-weight: 400; }
+      .score-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+      .score-row { display: grid; grid-template-columns: minmax(0, 1fr) 1.1fr 30px; align-items: center; gap: 9px; min-height: 14px; color: #656158; font-size: 10px; }
+      .score-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .score-row.is-top .score-name { color: var(--ink); font-weight: 700; }
+      .bar-track { height: 5px; overflow: hidden; border-radius: 99px; background: #eeeae2; }
+      .bar-value { height: 100%; border-radius: inherit; background: #aeb8a7; }
+      .score-row.is-top .bar-value { background: var(--accent); }
+      .score-value { color: #706c64; font-variant-numeric: tabular-nums; text-align: right; }
+      .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 19px; border-top: 1px solid #eee9df; color: #817c72; font-size: 9px; line-height: 1.5; }
+      .card-bottom strong { color: #68635a; font-weight: 600; }
+      .result-actions { display: flex; justify-content: center; gap: 8px; margin: 15px 0 5px; }
+      .result-actions .primary-button { flex: 1; max-width: 250px; min-width: 0; min-height: 46px; }
+      .result-actions .secondary-button { min-height: 46px; border-color: #dcd5c9; }
+      .share-status { min-height: 18px; margin: 8px 0 0; color: var(--sage); font-size: 11px; text-align: center; }
+      .site-footnote { margin: 18px 0 0; color: #99948a; font-size: 10px; line-height: 1.7; text-align: center; }
+      @media (min-width: 600px) {
+        .app-shell { width: min(100% - 48px, 560px); padding-top: 32px; }
+        .welcome { min-height: min(760px, calc(100svh - 112px)); }
+        .quiz { padding-top: 64px; }
+        .progress-track { margin-bottom: 52px; }
+        .answer { min-height: 60px; padding-inline: 16px; }
+        .card-content { padding: 20px 22px 17px; }
+        .card-top, .card-bottom { padding-inline: 22px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-shell" id="app"></main>
+    <script>
+      (() => {
+        const questions = [
+          { id: 1, dimension: "pride", text: "讨论事情时，我常觉得自己的判断比多数人更靠谱。" },
+          { id: 2, dimension: "pride", text: "别人指出我的问题时，我第一反应通常是解释自己为什么没错。" },
+          { id: 3, dimension: "pride", text: "做得不错时，我会希望别人注意到我的表现。" },
+          { id: 4, dimension: "envy", text: "看到别人拥有我想要的东西时，我会忍不住拿自己比较。" },
+          { id: 5, dimension: "envy", text: "刷到别人过得很精彩，我有时会觉得自己的生活逊色了些。" },
+          { id: 6, dimension: "envy", text: "别人取得好成绩或被夸奖时，我会在意自己有没有得到同样的认可。" },
+          { id: 7, dimension: "wrath", text: "被人临时放鸽子或打乱安排时，我容易明显烦躁。" },
+          { id: 8, dimension: "wrath", text: "情绪上来时，我有时会说出比本意更冲的话。" },
+          { id: 9, dimension: "wrath", text: "一件不顺心的事过去后，我还会反复想起并感到生气。" },
+          { id: 10, dimension: "sloth", text: "面对没有即时回报的任务，我常常拖到最后才开始。" },
+          { id: 11, dimension: "sloth", text: "即使知道某件事重要，只要想到过程麻烦，我就容易先搁着。" },
+          { id: 12, dimension: "sloth", text: "有空闲时，我常选择继续刷手机，而不是开始计划已久的事。" },
+          { id: 13, dimension: "greed", text: "遇到限时优惠或“只剩最后几个”时，我容易想赶紧买下来。" },
+          { id: 14, dimension: "greed", text: "已经拥有够用的东西，我还是常惦记着更好的版本。" },
+          { id: 15, dimension: "greed", text: "手里的资源或机会，我通常更愿意先留给自己，以免之后不够。" },
+          { id: 16, dimension: "gluttony", text: "心情不好时，我会想用喜欢的食物、娱乐或购物来安慰自己。" },
+          { id: 17, dimension: "gluttony", text: "面对喜欢的内容或消遣，我常会想“再来一点”，不太想停下。" },
+          { id: 18, dimension: "gluttony", text: "比起延迟满足，我更容易选择当下能让我开心的东西。" },
+          { id: 19, dimension: "lust", text: "我容易被有魅力的人吸引，即使彼此还不太熟。" },
+          { id: 20, dimension: "lust", text: "遇到让我心动的人时，我会花不少时间琢磨对方的反应。" },
+          { id: 21, dimension: "lust", text: "有人对我表达好感时，我会很享受那种被关注、被喜欢的感觉。" },
+        ];
+        const dimensions = [
+          { id: "pride", name: "傲慢", label: "自我优越感", copy: "你擅长快速判断，也很在意自己的努力被看见。偶尔很正常；这只是这份小测呈现出的倾向。", nudge: "下一次可以试试先听完对方的证据，让笃定里多留一扇窗。" },
+          { id: "envy", name: "嫉妒", label: "比较心", copy: "你对想要的生活很敏锐，看到他人的进展时也容易拿来做自己的标尺。偶尔比较很常见，不代表你不欣赏别人。", nudge: "把“我也想要”写成一个具体的小目标，也许比比较更能带你靠近它。" },
+          { id: "wrath", name: "暴怒", label: "情绪爆点", copy: "你对失序和不被尊重的时刻反应直接。情绪起伏是日常经验，这个分数不代表问题或诊断。", nudge: "给自己一点暂停空间，等情绪落地，再决定要不要回应。" },
+          { id: "sloth", name: "懒惰", label: "拖延逃避", copy: "你会被看起来费力、回报遥远的事劝退；这不是对你这个人的判断。人都会拖延，状态也会变化。", nudge: "把第一步缩小到两分钟，常常比等动力更有效。" },
+          { id: "greed", name: "贪婪", label: "占有欲", copy: "你很会留意机会，也希望手里的资源够用。想多留一点安全感是人之常情，这个结果不定义你。", nudge: "买下或抓住之前，先问自己：我想要的是它，还是“错过”的焦虑？" },
+          { id: "gluttony", name: "暴食", label: "即时享乐", copy: "你能从好吃好玩的事里获得快乐，也很容易想把快乐再延长一点。享受生活本身没问题，这份小测只是一次轻松观察。", nudge: "试试给“再来一点”一个明确的停靠点，享受也能被好好留住。" },
+          { id: "lust", name: "色欲", label: "心动与亲密关系", copy: "你对吸引与被喜欢都很敏锐，容易留意关系里的信号。心动很自然，这个结果不评价你的关系或选择。", nudge: "把心动和真正的了解分开留着，慢一点也能让关系更舒服。" },
+        ];
+        const scale = ["完全不符合", "比较不符合", "说不清", "比较符合", "非常符合"];
+        const app = document.querySelector("#app");
+        const state = { screen: "welcome", order: [], index: 0, answers: {}, status: "" };
+
+        function shuffled(items) {
+          const result = [...items];
+          for (let index = result.length - 1; index > 0; index -= 1) {
+            const swap = Math.floor(Math.random() * (index + 1));
+            [result[index], result[swap]] = [result[swap], result[index]];
+          }
+          return result;
+        }
+
+        function renderWelcome() {
+          return `
+            <header class="topline">
+              <a class="brand" href="../" aria-label="返回人生进阶指南"><span class="brand-mark">七</span><span>轻松一点，认识自己</span></a>
+              <span>仅供娱乐 · 约 3 分钟</span>
+            </header>
+            <section class="view welcome" aria-labelledby="welcome-title">
+              <p class="eyebrow">A LITTLE SELF-CHECK · NO LABELS</p>
+              <h1 id="welcome-title">最近的你，<br>更像哪一种<br><em>人间小毛病？</em></h1>
+              <p class="intro">用 21 个小问题，看看最近一个月里，哪种倾向更常冒头。没有标准答案，也不需要给自己贴标签。</p>
+              <ul class="dimension-orbit" aria-label="七个观察维度">
+                ${dimensions.map(({ name }) => `<li>${name}</li>`).join("")}
+              </ul>
+              <p class="note"><span class="note-mark">※</span><span>请按“最近一个月”的真实感受作答。这是娱乐自测，不是心理诊断，也不替代专业建议。</span></p>
+              <button class="primary-button" type="button" data-action="start">开始 21 题 <span class="arrow" aria-hidden="true">→</span></button>
+            </section>
+          `;
+        }
+
+        function renderQuiz() {
+          const question = state.order[state.index];
+          const chosen = state.answers[question.id];
+          const progress = ((state.index + 1) / questions.length) * 100;
+          return `
+            <header class="topline">
+              <a class="brand" href="../" aria-label="返回人生进阶指南"><span class="brand-mark">七</span><span>七宗罪趣味自测</span></a>
+              <span>最近一个月 · 凭直觉作答</span>
+            </header>
+            <section class="view quiz" aria-labelledby="question-title">
+              <div class="progress-heading"><span>完成进度</span><strong>${state.index + 1}<span aria-hidden="true"> / </span><span class="sr-only">共</span>21</strong></div>
+              <div class="progress-track" role="progressbar" aria-label="答题进度" aria-valuemin="0" aria-valuemax="21" aria-valuenow="${state.index + 1}"><div class="progress-value" style="width:${progress}%"></div></div>
+              <p class="question-count">QUESTION ${String(state.index + 1).padStart(2, "0")}</p>
+              <h1 id="question-title" tabindex="-1" aria-live="polite" aria-atomic="true">${question.text}</h1>
+              <fieldset class="answer-list" aria-label="选择符合程度">
+                <legend class="sr-only">选择符合程度</legend>
+                ${scale.map((label, index) => {
+                  const value = index + 1;
+                  return `<button class="answer" type="button" data-answer="${value}" aria-pressed="${chosen === value}"><span class="answer-number">${value}</span><span class="answer-label">${label}</span><span class="answer-check" aria-hidden="true">✓</span></button>`;
+                }).join("")}
+              </fieldset>
+              <div class="quiz-actions">
+                <button class="secondary-button" type="button" data-action="back"${state.index === 0 ? " disabled" : ""}>← 上一题</button>
+                <span class="hint" role="status">${state.status || (chosen === undefined ? "选择一个符合程度，将自动进入下一题" : "点选其他选项可修改并继续")}</span>
+              </div>
+            </section>
+          `;
+        }
+
+        function calculateScores() {
+          return dimensions.map((dimension) => ({
+            ...dimension,
+            score: questions
+              .filter((question) => question.dimension === dimension.id)
+              .reduce((sum, question) => sum + state.answers[question.id], 0),
+          }));
+        }
+
+        function renderResults() {
+          const scores = calculateScores();
+          const highest = Math.max(...scores.map(({ score }) => score));
+          const leaders = scores.filter(({ score }) => score === highest);
+          const top = leaders[0];
+          const scoreRows = [...scores]
+            .sort((left, right) => right.score - left.score || dimensions.findIndex(({ id }) => id === left.id) - dimensions.findIndex(({ id }) => id === right.id))
+            .map(({ id, name, label, score }) => `
+              <li class="score-row${score === highest ? " is-top" : ""}" aria-label="${name}｜${label}：${score} 分">
+                <span class="score-name">${name}<span aria-hidden="true">｜</span>${label}</span>
+                <span class="bar-track" aria-hidden="true"><span class="bar-value" style="display:block;width:${(score / 15) * 100}%"></span></span>
+                <span class="score-value">${score}</span>
+              </li>`).join("");
+          const tieNote = leaders.length > 1 ? ` · 与${leaders.slice(1).map(({ name }) => name).join("、")}并列` : "";
+          state.shareText = `我的七宗罪趣味自测结果：${leaders.map(({ name }) => name).join("、")}（${highest}/15）。这只是娱乐自测，不是心理诊断。\n${location.href}`;
+          const shareLabel = typeof navigator.share === "function" ? "分享我的结果" : "复制结果";
+
+          return `
+            <header class="topline">
+              <a class="brand" href="../" aria-label="返回人生进阶指南"><span class="brand-mark">七</span><span>七宗罪趣味自测</span></a>
+              <button class="text-button" type="button" data-action="retake">再测一次 ↻</button>
+            </header>
+            <section class="view results" aria-labelledby="result-title">
+              <article class="result-card" aria-label="我的趣味自测结果卡">
+                <div class="card-top"><span class="card-brand"><span class="card-brand-mark">七</span>最近一个月的轻松观察</span><span>SELF-CHECK · FOR FUN</span></div>
+                <div class="card-content">
+                  <p class="result-kicker">本次最高倾向${tieNote}</p>
+                  <div class="result-title-row">
+                    <h1 class="result-title" id="result-title">${top.name}<span aria-hidden="true"> · </span>${top.label}</h1>
+                    <div class="result-score">${highest}<small>满分 15</small></div>
+                  </div>
+                  <p class="result-copy">${top.copy}</p>
+                  <p class="result-nudge">${top.nudge}</p>
+                  <h2 class="distribution-heading">七个维度分布 <span>单项 3–15 分 · 分数越高表示越符合</span></h2>
+                  <ol class="score-list">${scoreRows}</ol>
+                </div>
+                <div class="card-bottom"><span>没有标准答案，结果不定义你。</span><strong>娱乐自测 · 非心理诊断</strong></div>
+              </article>
+              <div class="result-actions">
+                <button class="primary-button" type="button" data-action="share">${shareLabel} <span class="arrow" aria-hidden="true">↗</span></button>
+                <button class="secondary-button" type="button" data-action="retake">重测</button>
+              </div>
+              <p class="share-status" role="status" aria-live="polite">${state.status}</p>
+              <p class="site-footnote">这是娱乐自测，不是心理诊断；分数只代表本次作答，不代表固定人格。</p>
+            </section>
+          `;
+        }
+
+        function render() {
+          app.innerHTML = state.screen === "welcome"
+            ? renderWelcome()
+            : state.screen === "quiz"
+              ? renderQuiz()
+              : renderResults();
+          app.querySelector('[data-action="start"]')?.addEventListener("click", () => {
+            state.order = shuffled(questions);
+            state.answers = {};
+            state.index = 0;
+            state.status = "";
+            state.screen = "quiz";
+            render();
+            app.querySelector("#question-title")?.focus();
+          });
+          app.querySelector('[data-action="back"]')?.addEventListener("click", () => {
+            if (state.index === 0) return;
+            state.index -= 1;
+            state.status = "上一题的答案已保留，选择新答案即可更新。";
+            render();
+            app.querySelector("#question-title")?.focus();
+          });
+          app.querySelectorAll("[data-answer]").forEach((button) => {
+            button.addEventListener("click", () => {
+              const question = state.order[state.index];
+              state.answers[question.id] = Number(button.dataset.answer);
+              if (state.index === state.order.length - 1) {
+                state.status = "";
+                state.screen = "results";
+              } else {
+                state.status = "已记录，继续凭直觉作答。";
+                state.index += 1;
+              }
+              render();
+              app.querySelector(state.screen === "results" ? "#result-title" : "#question-title")?.focus();
+            });
+          });
+          app.querySelectorAll('[data-action="retake"]').forEach((button) => {
+            button.addEventListener("click", () => {
+              state.screen = "welcome";
+              state.status = "";
+              render();
+            });
+          });
+          app.querySelector('[data-action="share"]')?.addEventListener("click", shareResult);
+        }
+
+        async function copyResult() {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(state.shareText);
+            return;
+          }
+          const textarea = document.createElement("textarea");
+          textarea.value = state.shareText;
+          textarea.setAttribute("readonly", "");
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.append(textarea);
+          textarea.select();
+          const copied = document.execCommand("copy");
+          textarea.remove();
+          if (!copied) throw new Error("Copy was not available");
+        }
+
+        async function shareResult() {
+          state.status = "";
+          try {
+            if (typeof navigator.share === "function") {
+              await navigator.share({ title: "七宗罪趣味自测", text: state.shareText });
+              state.status = "分享面板已打开。";
+            } else {
+              await copyResult();
+              state.status = "结果已复制，可以发给朋友一起玩。";
+            }
+          } catch (error) {
+            if (error?.name === "AbortError") return;
+            try {
+              await copyResult();
+              state.status = "分享暂不可用，结果已复制。";
+            } catch {
+              state.status = "分享或复制暂不可用，请截屏保存这张结果卡。";
+            }
+          }
+          render();
+        }
+
+        render();
+      })();
+    </script>
+  </body>
+</html>

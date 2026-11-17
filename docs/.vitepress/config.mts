@@ -310,6 +310,7 @@ export default defineConfig({
       themeConfig: {
         siteTitle: "人生进阶指南",
         nav: [
+          { text: "七宗罪自测", link: "/seven-sins-test/" },
           { text: "终身学习", link: "/templates/learning-state" },
           { text: "AI 学习", link: "/threads/part-3/1-ai-learning" },
           { text: "实践路线", link: "/practice" },
